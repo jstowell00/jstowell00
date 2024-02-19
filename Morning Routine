@@ -1,0 +1,46 @@
+import datetime
+
+# Function to get the time from the user
+def get_time(prompt):
+    while True:
+        try:
+            time_str = input(prompt + " (format: HH:MM): ")
+            time = datetime.datetime.strptime(time_str, "%H:%M")
+            return time
+        except ValueError:
+            print("Invalid time format. Please use HH:MM format.")
+
+# Function to get the activity from the user
+def get_activity():
+    while True:
+        print("What did you do right after waking up?")
+        print("1. Got up immediately")
+        print("2. Went on phone")
+        print("3. Read a book")
+        choice = input("Enter the number corresponding to your activity: ")
+        if choice in ['1', '2', '3']:
+            if choice == '1':
+                return "Got up immediately"
+            elif choice == '2':
+                return "Went on phone"
+            elif choice == '3':
+                return "Read a book"
+        else:
+            print("Invalid choice. Please enter a valid number.")
+
+# Main function to gather information
+def gather_morning_info():
+    print("Good morning! Let's gather some information about your morning routine.")
+    wake_up_time = get_time("What time did you wake up?")
+    bed_time = get_time("What time did you get out of bed?")
+    activity = get_activity()
+
+    time_in_bed = bed_time - wake_up_time
+
+    print("\nMorning routine information:")
+    print("Wake up time:", wake_up_time.strftime("%H:%M"))
+    print("Time spent in bed:", str(time_in_bed))
+    print("Activity after waking up:", activity)
+
+# Execute the main function
+gather_morning_info()
